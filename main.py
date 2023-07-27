@@ -58,11 +58,14 @@ def update_post(id:int,item:schema.Posts,db: Session = Depends(get_db)):
     ret=query.first()
     return ret
 
-@app.delete('/posts/{id}')
+@app.delete('/posts/{id}',response_model=schema.PostResponse)
 def delete_post(id:int,db: Session = Depends(get_db)):
     query=db.query(models.Post).filter(models.Post.id == id)
+    ret=query
+    ret=ret.first()
     query.delete()
     db.commit()
+    return ret
    
 @app.get('/users')
 def get_user(db: Session = Depends(get_db)):
