@@ -1,5 +1,6 @@
 from sqlalchemy import Column, Integer, String, Boolean ,Date, ForeignKey
 from database import Base
+from sqlalchemy.orm import relationship
 class Post(Base):
     __tablename__ = "posts"
     id=Column(Integer, primary_key=True, index=True)
@@ -8,6 +9,7 @@ class Post(Base):
     content=Column(String)
     published=Column(Boolean)
     createdat=Column(Date)
+    user=relationship("User")
 class User(Base):
     __tablename__ = "users"
     userid=Column(Integer, primary_key=True, index=True)

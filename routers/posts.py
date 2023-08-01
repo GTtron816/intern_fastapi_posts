@@ -11,20 +11,20 @@ router=APIRouter(
     tags=["Posts"]
 )
 
-@router.get('/')
-def get_user(db: Session = Depends(get_db)):
+@router.get('/',response_model=List[schema.PostResponse])
+def get_post(db: Session = Depends(get_db)):
     posts=db.query(models.Post).all()
     return posts
     
   
 
-@router.get('/{id}')
-def get_user(id:int,db: Session = Depends(get_db)):
+@router.get('/{id}',response_model=List[schema.PostResponse])
+def get_post(id:int,db: Session = Depends(get_db)):
     post=db.query(models.Post).filter(models.Post.id== id).first()
     return [post]
 
-@router.get('/userposts/{uid}')
-def get_user(uid:int,db: Session = Depends(get_db)):
+@router.get('/userposts/{uid}',response_model=List[schema.PostResponse])
+def get_post(uid:int,db: Session = Depends(get_db)):
     post=db.query(models.Post).filter(models.Post.userid == uid ).all()
     return post
  
