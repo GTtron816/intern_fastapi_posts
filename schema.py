@@ -1,5 +1,6 @@
 from pydantic import BaseModel
 class Posts(BaseModel):
+    userid:int
     title:str
     content:str
     published:bool
