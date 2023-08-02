@@ -6,7 +6,7 @@ from typing import List
 import  models
 import schema
 from datetime import date
-from routers import users,posts
+from routers import users,posts,form
 
 from database import SessionLocal, engine,get_db
 
@@ -35,3 +35,4 @@ app.add_middleware(
    
 app.include_router(users.router)
 app.include_router(posts.router)
+app.include_router(form.router)
