@@ -5,6 +5,7 @@ import  models
 import schema
 from datetime import date
 from database import get_db
+from utils import hash
 
 router=APIRouter(
     prefix="/users",
@@ -23,6 +24,8 @@ def get_user(email:str,db: Session = Depends(get_db)):
      
 @router.post('/',response_model=schema.UserResponse)
 def add_user(item:schema.Users,db: Session = Depends(get_db)):
+    hash_pass=hash(item.password)
+    item.password=hash_pass
     created=date.today()
     new_user=models.User(createdat=created,**item.dict())
     db.add(new_user)
